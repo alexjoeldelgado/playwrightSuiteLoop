@@ -25,10 +25,7 @@ module.exports = defineConfig({
   ],
 
   use: {
-    // You can also put baseURL here if you want, but since you're reading it from JSON
-    // it’s fine to leave this out.
-    // baseURL: "https://animated-gingersnap-8cf7f2.netlify.app/",
-
+    // runs without browser open
     headless: true,
 
     // Good defaults for stability
@@ -40,14 +37,11 @@ module.exports = defineConfig({
     trace: "on-first-retry",
     video: "retain-on-failure",
 
-    // If the app is sensitive to viewport changes, pin it
+    // Standard viewport for testing
     viewport: { width: 1280, height: 720 },
-
-    // If you want to see the browser locally sometimes:
-    // headless: false,
-    // launchOptions: { slowMo: 100 },
   },
 
+  // At the moment only tested in Chrome, but other browsers would be added here
   projects: [
     {
       name: "chromium",
