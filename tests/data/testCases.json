@@ -1,0 +1,57 @@
+{
+    "demoURL": "https://animated-gingersnap-8cf7f2.netlify.app/",
+    "credentials": {
+        "email": "admin",
+        "password": "password123"
+    },
+    "cases": [
+        {
+            "id": 1,
+            "name": "Web App - Implement user authentication is in To Do with Feature and High Priority",
+            "application": "Web Application",
+            "columnName": "To Do",
+            "taskTitle": "Implement user authentication",
+            "expectedTags": ["Feature", "High Priority"]
+        },        
+        {
+            "id": 2,
+            "name": "Web App - Fix navigation bug is in To Do with Bug",
+            "application": "Web Application",
+            "columnName": "To Do",
+            "taskTitle": "Fix navigation bug",
+            "expectedTags": ["Bug"]
+        },        
+        {
+            "id": 3,
+            "name": "Web App - Design system updates is in In Progress with Design",
+            "application": "Web Application",
+            "columnName": "In Progress",
+            "taskTitle": "Design system updates",
+            "expectedTags": ["Design"]
+        },        
+        {
+            "id": 4,
+            "name": "Mobile App - Push notification system is in To Do with Feature",
+            "application": "Mobile Application",
+            "columnName": "To Do",
+            "taskTitle": "Push notification system",
+            "expectedTags": ["Feature"]
+        },        
+        {
+            "id": 5,
+            "name": "Mobile App - Offline mode is in In Progress with Feature and High Priority",
+            "application": "Mobile Application",
+            "columnName": "In Progress",
+            "taskTitle": "Offline mode",
+            "expectedTags": ["Feature", "High Priority"]
+        },        
+        {
+            "id": 6,
+            "name": "Mobile App - App icon design is in Done with Design",
+            "application": "Mobile Application",
+            "columnName": "Done",
+            "taskTitle": "App icon design",
+            "expectedTags": ["Design"]
+        }
+    ] 
+}
