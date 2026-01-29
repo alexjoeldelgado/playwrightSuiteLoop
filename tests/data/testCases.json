@@ -4,6 +4,8 @@
         "email": "admin",
         "password": "password123"
     },
+    "splashTitle": "Project Board Login",
+    "boardTitle": "Projects",
     "cases": [
         {
             "id": 1,

@@ -13,11 +13,11 @@ class LoginPage {
         this.submitButton = page.locator("xpath=//button[@type='submit']");
     }
 
-    async goto(baseUrl) {
+    async goto(baseUrl, splashTitle) {
         // Navigate to Page
         await this.page.goto(baseUrl, { waitUntil: "domcontentloaded" });
         // Ensure the page is loaded and is the expected elements are on the page
-        await expect(this.loginTitle).toHaveText("Project Board Login")
+        await expect(this.loginTitle).toHaveText(splashTitle)
         await expect(this.emailInput).toBeVisible();
         await expect(this.passwordInput).toBeVisible();
     }
@@ -36,8 +36,8 @@ class LoginPage {
     }
 
     // Create validation that login was successful
-    async assertLoggedIn() {
-        const postLoginValidation = this.page.getByText("Projects");
+    async assertLoggedIn(dashTitle) {
+        const postLoginValidation = this.page.getByText(dashTitle);
         await expect(postLoginValidation).toBeVisible({ timeout: 10000 });
     }
 }

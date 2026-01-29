@@ -13,9 +13,9 @@ test.describe("Playwright Test Suite - Data Driven", () => {
   test.beforeEach(async ({ page }) => {
     // Before each test, login to page
     const loginPage = new LoginPage(page);
-    await loginPage.goto(testData.demoURL);
+    await loginPage.goto(testData.demoURL, testData.splashTitle);
     await loginPage.login(testData.credentials.email, testData.credentials.password);
-    await loginPage.assertLoggedIn();
+    await loginPage.assertLoggedIn(testData.dashTitle);
   });
 
   for (const c of testData.cases) {

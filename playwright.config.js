@@ -1,81 +1,60 @@
-// @ts-check
-import { defineConfig, devices } from '@playwright/test';
+const { defineConfig, devices } = require("@playwright/test");
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
-
-/**
- * @see https://playwright.dev/docs/test-configuration
- */
-export default defineConfig({
-  testDir: './tests',
-  /* Run tests in files in parallel */
-  fullyParallel: true,
-  /* Fail the build on CI if you accidentally left test.only in the source code. */
-  forbidOnly: !!process.env.CI,
-  /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
-  /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  use: {
-    /* Base URL to use in actions like `await page.goto('')`. */
-    // baseURL: 'http://localhost:3000',
-
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+module.exports = defineConfig({
+  testDir: "./tests",
+  timeout: 30_000,
+  expect: {
+    timeout: 10_000,
   },
 
-  /* Configure projects for major browsers */
-  projects: [
-    {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
-    },
+  // Run tests in files in parallel; can be set to false if the demo app is flaky
+  fullyParallel: true,
 
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
+  // Fail the build on accidental .only in CI
+  forbidOnly: !!process.env.CI,
 
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+  // Retry in CI to reduce flakiness noise
+  retries: process.env.CI ? 2 : 0,
 
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
+  // Keep workers conservative in CI
+  workers: process.env.CI ? 1 : undefined,
 
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
+  reporter: [
+    ["list"],
+    ["html", { open: "never" }],
   ],
 
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://localhost:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
-});
+  use: {
+    // You can also put baseURL here if you want, but since you're reading it from JSON
+    // it’s fine to leave this out.
+    // baseURL: "https://animated-gingersnap-8cf7f2.netlify.app/",
 
+    headless: true,
+
+    // Good defaults for stability
+    actionTimeout: 10_000,
+    navigationTimeout: 20_000,
+
+    // Helpful artifacts
+    screenshot: "only-on-failure",
+    trace: "on-first-retry",
+    video: "retain-on-failure",
+
+    // If the app is sensitive to viewport changes, pin it
+    viewport: { width: 1280, height: 720 },
+
+    // If you want to see the browser locally sometimes:
+    // headless: false,
+    // launchOptions: { slowMo: 100 },
+  },
+
+  projects: [
+    {
+      name: "chromium",
+      use: { ...devices["Desktop Chrome"] },
+    }
+  ],
+
+  // Put all test artifacts here (screenshots, videos, traces)
+  outputDir: "test-results",
+});
